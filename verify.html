@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        function verifyCode() {
+            const userCode = document.getElementById('codeInput').value;
+
+            fetch('https://raw.githubusercontent.com/your-username/your-repo/main/secret_codes.txt')  
+                .then(response => response.text())
+                .then(codes => {
+                    const validCodes = codes.split('\n');
+                    if (validCodes.includes(userCode)) {
+                        alert('Code successful!');
+                    } else {
+                        alert('Code unsuccessful.');
+                    }
+                })
+                .catch(error => console.error("Error fetching codes:", error));
+        }
+    </script>
+
+    <input type="text" id="codeInput">
+    <button onclick="verifyCode()">Verify</button>
+</body>
+</html>
